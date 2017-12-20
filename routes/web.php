@@ -17,3 +17,17 @@ Route::post('signup', 'SignupController@postIndex');
 Route::get('signup/confirm', 'SignupController@confirm')->name('signup.confirm');
 Route::post('signup/confirm', 'SignupController@postConfirm');
 Route::get('signup/thanks', 'SignupController@thanks')->name('signup.thanks');
+
+// 管理者
+Route::prefix('admin')->namespace('Admin')->as('admin.')->group(function () {
+
+    Route::middleware('guest:admin')->group(function () {
+        Route::get('login', 'LoginController@showLoginForm')->name('login');
+        Route::post('login', 'LoginController@login');
+    });
+
+    Route::middleware('auth:admin')->group(function () {
+        Route::get('logout', 'LoginController@logout')->name('logout');
+        Route::get('', 'IndexController@index')->name('top');
+    });
+});

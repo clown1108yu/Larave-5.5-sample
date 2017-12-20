@@ -16,5 +16,9 @@ class DatabaseSeeder extends Seeder
         );
 
         factory(App\User::class, 9)->create();
+
+        factory(App\Admin::class)->create(
+            ['username' => 'taro', 'password' => bcrypt('jiro')]
+        );
     }
 }
